@@ -1,0 +1,17 @@
+Training Perceptron on AND gate...
+Epoch 0 | Errors: 2
+Epoch 1 | Errors: 3
+Epoch 2 | Errors: 3
+Epoch 3 | Errors: 0
+Epoch 4 | Errors: 0
+Epoch 5 | Errors: 0
+Epoch 6 | Errors: 0
+Epoch 7 | Errors: 0
+Epoch 8 | Errors: 0
+Epoch 9 | Errors: 0
+
+Testing:
+Input: (0, 0) -> Prediction: 0 (Expected: 0)
+Input: (0, 1) -> Prediction: 0 (Expected: 0)
+Input: (1, 0) -> Prediction: 0 (Expected: 0)
+Input: (1, 1) -> Prediction: 1 (Expected: 1)

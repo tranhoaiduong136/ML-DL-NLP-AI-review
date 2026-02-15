@@ -2,34 +2,35 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17
 LDFLAGS = 
 
-# Source files
-SRCS = main.cpp \
-       core/Neuron.cpp \
-       models/Perceptron.cpp \
-       activations/Step.cpp
+# Common objects
+COMMON_OBJS = core/Neuron.o \
+              activations/Step.o \
+              activations/Sigmoid.o \
+              layers/Layer.o \
+              loss/MSE.o \
+              models/Perceptron.o \
+              models/MLP.o
 
-# Object files (in build directory or alongside source)
-OBJS = $(SRCS:.cpp=.o)
+# Targets
+all: neural_net mlp_test
 
-# Executable name
-TARGET = neural_net
+neural_net: main.o $(COMMON_OBJS)
+	$(CXX) $(CXXFLAGS) -o neural_net main.o $(COMMON_OBJS) $(LDFLAGS)
 
-# Main target
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
+mlp_test: main_MLP.o $(COMMON_OBJS)
+	$(CXX) $(CXXFLAGS) -o mlp_test main_MLP.o $(COMMON_OBJS) $(LDFLAGS)
 
 # Compile source files into object files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up build artifacts
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(COMMON_OBJS) main.o main_MLP.o neural_net mlp_test
 
-# Run the program
-run: all
-	./$(TARGET)
+run: neural_net
+	./neural_net
 
-.PHONY: all clean run
+run_mlp: mlp_test
+	./mlp_test
+
+.PHONY: all clean run run_mlp

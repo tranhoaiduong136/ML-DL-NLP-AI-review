@@ -6,7 +6,7 @@ Perceptron::Perceptron(int input_size, double lr)
     : neuron(input_size, std::make_shared<Step>()),
       learning_rate(lr) {}
 
-double Perceptron::predict(const std::vector<double>& x) const {
+double Perceptron::predict(const std::vector<double>& x) {
     return neuron.forward(x);
 }
 
@@ -30,5 +30,10 @@ void Perceptron::train(
 
         std::cout << "Epoch " << epoch
                   << " | Errors: " << errors << "\n";
+        
+        if (errors == 0) {
+            std::cout << "Converged at epoch " << epoch << "\n";
+            break;
+        }
     }
 }

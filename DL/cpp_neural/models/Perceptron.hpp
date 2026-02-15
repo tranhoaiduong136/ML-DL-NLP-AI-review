@@ -9,7 +9,7 @@ private:
 public:
     Perceptron(int input_size, double lr);
 
-    double predict(const std::vector<double>& x) const;
+    double predict(const std::vector<double>& x);
 
     void train(
         const std::vector<std::vector<double>>& X,
